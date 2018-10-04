@@ -1,5 +1,6 @@
 
 package com.apap.tutorial4.controller;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class DealerController {
 		String no_telp = listDealer.getNoTelp();
 		Long id = listDealer.getId();
 		List <CarModel> car_list = listDealer.getListCar();
-
+		Collections.sort(car_list, new SortCar());
+		
 //		for (int i = 0; i < car_list.size() - 1 ; i++) {
 //			for (int j = 0; j < car_list.size() - 1 ; j++) {
 //				
@@ -77,30 +79,22 @@ public class DealerController {
 		return "delete-dealer";
 	}
 	
+	@RequestMapping("/dealer/view-all")
+	private String home(Model model) {
+		model.addAttribute("dealer_list", dealerService.getAllDealer());
+		return "view-dealer-all";
+	}
+	
 	class SortCar implements Comparator <CarModel>{
 		  public int compare(CarModel a, CarModel b) {
 		   return (int) (a.getPrice() - b.getPrice());
 		  }
-		 }
-
-//	@RequestMapping(value = "/dealer/view", method = RequestMethod.GET)
-//	public String viewById(
-//			@RequestParam(value = "dealerId", required = true) Long dealerId,
-//			Model model
-//			) {
-//		DealerModel dealer = dealerService.getDealerDetailById(dealerId).get();
-//
-//		String alamat = dealer.getAlamat();
-//		String no_telp = dealer.getNoTelp();
-//		Long id = dealer.getId();
-//		List<CarModel> car_list = dealer.getListCar();
-//
-//		model.addAttribute("dealerID", id);
-//		model.addAttribute("alamat", alamat);
-//		model.addAttribute("no_telp", no_telp);
-//		model.addAttribute("car_list", car_list);
-//		return "view-dealer";
-//	}
-
-
+	}
+		 
 }
+	
+
+
+
+
+

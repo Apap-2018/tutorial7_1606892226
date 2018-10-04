@@ -1,5 +1,7 @@
 package com.apap.tutorial4.service;
+import java.util.List;
 import java.util.Optional;
+
 import com.apap.tutorial4.model.DealerModel;
 	
 	public interface DealerService {
@@ -7,6 +9,7 @@ import com.apap.tutorial4.model.DealerModel;
 		
 		void addDealer (DealerModel dealer);
 		void deleteDealer(long dealerId);
+		List<DealerModel> getAllDealer();
 
 	}
 

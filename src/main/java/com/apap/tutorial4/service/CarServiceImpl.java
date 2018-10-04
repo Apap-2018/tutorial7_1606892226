@@ -1,12 +1,13 @@
 
 package com.apap.tutorial4.service;
-import com.apap.tutorial4.model.CarModel;
-import com.apap.tutorial4.model.DealerModel;
-import com.apap.tutorial4.repository.CarDb;
-import com.apap.tutorial4.repository.DealerDb;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.apap.tutorial4.model.CarModel;
+import com.apap.tutorial4.repository.CarDb;
 
 
 @Service
@@ -25,9 +26,20 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		carDb.deleteById(carId);
 	}
-	
-	
-	
-	
+	@Override
+	public Optional<CarModel> getCarDetailById(Long id) {
+		// TODO Auto-generated method stub
+		return carDb.findById(id);
+	}
 
+	@Override
+	public void editCar(CarModel newCar, Long id) {
+		// TODO Auto-generated method stub
+		CarModel updatedCar = carDb.getOne(id);
+		updatedCar.setAmount(newCar.getAmount());
+		updatedCar.setBrand(newCar.getBrand());
+		updatedCar.setPrice(newCar.getPrice());
+		updatedCar.setType(newCar.getType());
+		carDb.save(updatedCar);
+	}
 }

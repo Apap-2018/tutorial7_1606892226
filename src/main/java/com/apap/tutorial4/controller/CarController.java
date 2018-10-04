@@ -45,5 +45,38 @@ public class CarController {
 		carService.deleteCar(carId);
 		return "redirect:/dealer/view?dealerId=" + Long.toString(dealerId);
 	}
+	
+
+	@RequestMapping(value = "/car/edit/{dealerId}/{carId}", method = RequestMethod.GET)
+	private String updateCar(
+			@PathVariable(value = "dealerId") Long dealerId,
+			@PathVariable(value = "carId") Long carId,
+			Model model
+			) {
+		CarModel car = carService.getCarDetailById(carId).get();
+		
+		String brand = car.getBrand();
+		String type = car.getType();
+		Long price = car.getPrice();
+		Integer amount = car.getAmount();
+
+		model.addAttribute("dealerId", dealerId);
+		model.addAttribute("carId", carId);
+		model.addAttribute("brand", brand);
+		model.addAttribute("type", type);
+		model.addAttribute("price", price);
+		model.addAttribute("amount", amount);
+		return "update-car";
+	}
+	
+	@RequestMapping(value = "/car/edit/{dealerId}/{carId}", method = RequestMethod.POST)
+	private String updateCar(
+			@PathVariable(value = "dealerId") Long dealerId,
+			@PathVariable(value = "carId") Long carId,
+			@ModelAttribute CarModel mobilTemp
+			) {
+		carService.editCar(mobilTemp, carId);
+		return "update" ;
+	}
 
 }

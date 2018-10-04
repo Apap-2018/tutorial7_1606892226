@@ -36,5 +36,14 @@ public class CarController {
 		carService.addCar(car);
 		return "add";
 	}
+	
+	@RequestMapping(value = "/car/delete/{dealerId}/{carId}", method = RequestMethod.POST)
+	private String deleteCar(
+			@PathVariable(value = "dealerId") Long dealerId,
+			@PathVariable(value = "carId") Long carId
+			) {
+		carService.deleteCar(carId);
+		return "redirect:/dealer/view?dealerId=" + Long.toString(dealerId);
+	}
 
 }

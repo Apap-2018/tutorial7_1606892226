@@ -6,6 +6,8 @@ import com.apap.tutorial4.model.DealerModel;
 		Optional <DealerModel> getDealerDetailById(Long id);
 		
 		void addDealer (DealerModel dealer);
+		void deleteDealer(long dealerId);
+
 	}
 
 

@@ -24,5 +24,11 @@ public class DealerServiceImpl implements DealerService {
 		dealerDb.save(dealer);
 	}
 	
+	@Override
+	public void deleteDealer(long dealerId) {
+		// TODO Auto-generated method stub
+		dealerDb.deleteById(dealerId);
+	}
+	
 	
 }

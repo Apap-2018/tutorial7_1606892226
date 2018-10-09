@@ -21,8 +21,8 @@ public class CarController {
 	@Autowired
 	private DealerService dealerService;
 	
-	@RequestMapping(value = "/car/add", method = RequestMethod.GET)
-	private String add(@RequestParam(value = "dealerId") Long dealerId, Model model) {
+	@RequestMapping(value = "/car/add/{dealerId}", method = RequestMethod.GET)
+	private String add(@PathVariable(value = "dealerId") Long dealerId, Model model) {
 		CarModel car = new CarModel();
 		DealerModel dealer = dealerService.getDealerDetailById(dealerId).get();
 		car.setDealer(dealer);
@@ -37,15 +37,22 @@ public class CarController {
 		return "add";
 	}
 	
-	@RequestMapping(value = "/car/delete/{dealerId}/{carId}", method = RequestMethod.POST)
-	private String deleteCar(
-			@PathVariable(value = "dealerId") Long dealerId,
-			@PathVariable(value = "carId") Long carId
-			) {
-		carService.deleteCar(carId);
-		return "redirect:/dealer/view?dealerId=" + Long.toString(dealerId);
-	}
+//	@RequestMapping(value = "/car/delete/{dealerId}/{carId}", method = RequestMethod.POST)
+//	private String deleteCar(
+//			@PathVariable(value = "dealerId") Long dealerId,
+//			@PathVariable(value = "carId") Long carId
+//			) {
+//		carService.deleteCar(carId);
+//		return "redirect:/dealer/view?dealerId=" + Long.toString(dealerId);
+//	}
 	
+	@RequestMapping(value = "/car/delete", method = RequestMethod.POST)
+	private String delete(@ModelAttribute DealerModel dealer, Model model) {
+		for (CarModel car : dealer.getListCar()) {
+			carService.deleteCar(car.getId());
+		}
+		return "delete" ;
+		}
 
 	@RequestMapping(value = "/car/edit/{dealerId}/{carId}", method = RequestMethod.GET)
 	private String updateCar(

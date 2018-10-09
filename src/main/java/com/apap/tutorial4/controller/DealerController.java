@@ -52,18 +52,6 @@ public class DealerController {
 		Long id = listDealer.getId();
 		List <CarModel> car_list = listDealer.getListCar();
 		Collections.sort(car_list, new SortCar());
-		
-//		for (int i = 0; i < car_list.size() - 1 ; i++) {
-//			for (int j = 0; j < car_list.size() - 1 ; j++) {
-//				
-//				if(car_list.get(i).getPrice() < car_list.get(j+1).getPrice()){
-//					
-//			      CarModel tempVar = car_list.get(j+1);
-//			      car_list.set(j+1, car_list.get(i));
-//			      car_list.set(i, tempVar);
-//			    }
-//			}
-//		}
 
 		model.addAttribute("dealer",listDealer);
 		model.addAttribute("dealerID", id);
@@ -73,8 +61,8 @@ public class DealerController {
 		return "view-dealer";
 	}
 	
-	@RequestMapping(value = "/dealer/delete/{dealerId}", method = RequestMethod.GET)
-	private String deleteDealer(@PathVariable(value = "dealerId") Long dealerId) {
+	@RequestMapping(value = "/dealer/delete", method = RequestMethod.GET)
+	private String deleteDealer(@RequestParam(value = "dealerId") Long dealerId) {
 		dealerService.deleteDealer(dealerId);
 		return "delete-dealer";
 	}

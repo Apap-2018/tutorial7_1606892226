@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Home</title>
+	<head th:fragment="headerFragment (title)">
+ 		<title th:text="${title}">Home</title>
 		
 		<head th:fragment="css">
+		
 			<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 		</head>
 		

@@ -1,53 +1,7 @@
-
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.com">
-  <head>
-    <title>View By Id</title>
-  </head>
-
-  <body>
-    <h3 th:text="'Alamat: ' + ${alamat}"></h3>
-    <h3 th:text="'Telepon: ' + ${no_telp}"></h3>
-    <ol>
-      <li
-      	th:each="car : ${car_list}"
-      >
-      	<h4 th:text="'Brand: ' + ${car.brand} + ' - Type: ' + ${car.type} + ' - Amount: ' + ${car.amount} + ' - Price: ' + ${car.price}"></h4>
-        <form th:action="@{'/car/edit/' + ${dealerID} + '/' + ${car.id}}" method="GET">
-          <button type="submit">Update Car</button>
-        </form>
-        <form th:action="@{'/car/delete/' + ${dealerID} + '/' + ${car.id}}" method="POST">
-          <button type="submit">Delete Car</button>
-        </form>
-        
-        <br>
-      </li>
-    </ol>
-    <td>
-      <a th:href="@{/car/add/(dealerId=${dealer.id})}">Tambah Mobil</a>
-      <a th:href="@{/}">Home</a>
-    </td>
-    <form th:action="@{'/dealer/delete/' + ${dealerID}}" method="GET">
-      <button type="submit">Delete Dealer</button>
-    </form>
-    
-    <tbody>
-					<tr th:each="car,iterationStatus : *{car_list}">
-						<td th:text="${iterationStatus.count}"></td>
-						<td th:text="${car.brand}"></td>
-						<td th:text="${car.type}"></td>
-						<td th:text="${car.price} >= 100000 ? 'Di ats 100K' : 'Di bwh 100K'"></td>
-						<td th:text="${car.amount}"></td>
-					</tr>
-				</tbody>
-  </body>
-
-</html> -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title>View Dealer</title>
+		<<title th:replace="fragments/fragment :: headerFragment (title='View Dealer')"></title>
 		
 		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 		<object th:include="fragments/fragment :: js" th:remove="tag"></object>

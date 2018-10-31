@@ -6,20 +6,23 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name="car")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CarModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //autoincrement , identity : sry
 	private long id;
-	
+
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "brand", nullable = false)
 	private String brand;
-	
+
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "type", nullable = false, unique = true)
@@ -27,17 +30,16 @@ public class CarModel implements Serializable {
 
 	@NotNull
 	@Column(name = "price", nullable = false)
-	private Long price;
-	
+	private String price;
+
 	@NotNull
 	@Column(name = "amount", nullable = false)
-	private Integer amount;
-	
+	private String amount;
+
 	@ManyToOne(fetch = FetchType.LAZY )
 	@JoinColumn(name = "dealer_id", referencedColumnName = "id", nullable = false)
 	@OnDelete(action =OnDeleteAction.NO_ACTION)
 	private DealerModel dealer;
-	
 
 	public long getId() {
 		return id;
@@ -63,19 +65,19 @@ public class CarModel implements Serializable {
 		this.type = type;
 	}
 
-	public Long getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
-	public Integer getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -86,7 +88,17 @@ public class CarModel implements Serializable {
 	public void setDealer(DealerModel dealer) {
 		this.dealer = dealer;
 	}
-	
-	
-	
+
+	public void setAmount(int parseInt) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setPrice(Long valueOf) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
 }

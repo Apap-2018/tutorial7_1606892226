@@ -1,33 +1,36 @@
 package com.apap.tutorial7.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name="dealer")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DealerModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
 	@Size(max =50)
 	@Column(name = "alamat", nullable = false)
 	private String alamat;
-	
+
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "no_telp", nullable = false)
 	private String noTelp;
-	
-	@OneToMany(mappedBy = "dealer", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+
+	@OneToMany(mappedBy = "dealer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<CarModel> listCar;
+	private List<CarModel> listCar; //mapped : method  mana yg nyambungin dealer ama list car, fetch type : cara dapetin list car, eager :list dapet semua lazy:ketika getter setter, cascade : intinya operasi apa yg akan di cascade
 
 	public long getId() {
 		return id;
@@ -60,8 +63,6 @@ public class DealerModel implements Serializable {
 	public void setListCar(List<CarModel> listCar) {
 		this.listCar = listCar;
 	}
-	
 
-	
+
 }
-

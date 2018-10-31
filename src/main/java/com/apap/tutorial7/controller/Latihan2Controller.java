@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.apap.tutorial7.rest.Setting;
 
+import java.util.Calendar;
+
 @RestController
 public class Latihan2Controller {
 
@@ -24,8 +26,8 @@ public class Latihan2Controller {
 
     @GetMapping(value = "/model")
     private  ResponseEntity<String> getStatus(@RequestParam("factory") String namaProdusen) throws Exception{
-        String path = Setting.produsenUrl + "&make=" + namaProdusen;
-        System.out.println(path);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        String path = Setting.produsenUrl + "&make=" + namaProdusen + "&year=" + year;
         ResponseEntity<String> response = restTemplate.getForEntity(path, String.class);
         return response;
     }

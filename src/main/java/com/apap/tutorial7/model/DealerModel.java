@@ -1,4 +1,6 @@
-package com.apap.tutorial4.model;
+package com.apap.tutorial7.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -23,7 +25,8 @@ public class DealerModel implements Serializable {
 	@Column(name = "no_telp", nullable = false)
 	private String noTelp;
 	
-	@OneToMany(mappedBy = "dealer", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST) 
+	@OneToMany(mappedBy = "dealer", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonIgnore
 	private List<CarModel> listCar;
 
 	public long getId() {

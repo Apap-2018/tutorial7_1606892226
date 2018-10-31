@@ -1,8 +1,8 @@
-package com.apap.tutorial4.service;
+package com.apap.tutorial7.service;
 
-import java.util.Optional;
+import java.util.*;
 
-import com.apap.tutorial4.model.CarModel;
+import com.apap.tutorial7.model.CarModel;
 
 public interface CarService {
 	
@@ -10,7 +10,9 @@ public interface CarService {
 	void deleteCar(long carId);
 	Optional<CarModel> getCarDetailById(Long id);
 	void editCar(CarModel newCar, Long id);
-	
+	List<CarModel> getAll();
+
+
 
 
 }

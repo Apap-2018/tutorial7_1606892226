@@ -1,4 +1,4 @@
-package com.apap.tutorial4.model;
+package com.apap.tutorial7.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,7 +36,6 @@ public class CarModel implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY )
 	@JoinColumn(name = "dealer_id", referencedColumnName = "id", nullable = false)
 	@OnDelete(action =OnDeleteAction.NO_ACTION)
-	@JsonIgnore
 	private DealerModel dealer;
 	
 

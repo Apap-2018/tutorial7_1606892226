@@ -1,4 +1,4 @@
-package com.apap.tutorial4.service;
+package com.apap.tutorial7.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apap.tutorial4.model.DealerModel;
-import com.apap.tutorial4.repository.DealerDb;
+import com.apap.tutorial7.model.DealerModel;
+import com.apap.tutorial7.repository.DealerDb;
 
 @Service
 @Transactional
@@ -36,5 +36,14 @@ public class DealerServiceImpl implements DealerService {
 		// TODO Auto-generated method stub
 		return dealerDb.findAll();
 	}
-	
+
+    @Override
+    public void dealerUpdate(DealerModel updateDealer, Long dealerId) {
+        DealerModel dataLama = dealerDb.findById(dealerId).get();
+        dataLama.setAlamat(updateDealer.getAlamat());
+        dataLama.setNoTelp(updateDealer.getNoTelp());
+        dealerDb.save(dataLama);
+    }
+
+
 }

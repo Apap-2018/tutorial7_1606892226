@@ -1,13 +1,13 @@
 
-package com.apap.tutorial4.service;
-import java.util.Optional;
+package com.apap.tutorial7.service;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.apap.tutorial4.model.CarModel;
-import com.apap.tutorial4.repository.CarDb;
+import com.apap.tutorial7.model.CarModel;
+import com.apap.tutorial7.repository.CarDb;
 
 
 @Service
@@ -41,5 +41,10 @@ public class CarServiceImpl implements CarService{
 		updatedCar.setPrice(newCar.getPrice());
 		updatedCar.setType(newCar.getType());
 		carDb.save(updatedCar);
+	}
+
+	@Override
+	public List<CarModel> getAll() {
+		return carDb.findAll();
 	}
 }
